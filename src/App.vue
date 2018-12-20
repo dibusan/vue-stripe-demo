@@ -7,7 +7,8 @@
 </template>
 
 <script>
-  import VsdWizard from './components/vsd-wizard.vue'
+  import VsdWizard from './components/vsd-wizard.vue';
+  import BootstrapVue from 'bootstrap-vue'
 
   export default {
     name: 'app',
