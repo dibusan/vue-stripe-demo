@@ -1,96 +1,32 @@
 <template>
   <div id="wizard-container">
+    
     <div class="wizard-step" id="wizard-step-1">
-      <h3>Create Barber Ranks Account</h3>
-
-      <b-form @submit="onSubmit" @reset="onReset">
-
-        <b-form-group id="exampleInputGroup1"
-                      label="Email address:"
-                      label-for="exampleInput1">
-          <b-form-input id="exampleInput1"
-                        type="email"
-                        v-model="form.email"
-                        required
-                        placeholder="Enter email">
-          </b-form-input>
-        </b-form-group>
-
-        <b-form-group id="exampleInputGroup2"
-                      label="Your Name:"
-                      label-for="exampleInput2">
-          <b-form-input id="exampleInput2"
-                        type="text"
-                        v-model="form.name"
-                        required
-                        placeholder="Enter name">
-          </b-form-input>
-        </b-form-group>
-
-        <b-form-group id="exampleInputGroup3"
-                      label="Food:"
-                      label-for="exampleInput3">
-          <b-form-select id="exampleInput3"
-                        :options="foods"
-                        required
-                        v-model="form.food">
-          </b-form-select>
-        </b-form-group>
-
-        <b-form-group id="exampleGroup4">
-          <b-form-checkbox-group v-model="form.checked" id="exampleChecks">
-            <b-form-checkbox value="me">Check me out</b-form-checkbox>
-            <b-form-checkbox value="that">Check that out</b-form-checkbox>
-          </b-form-checkbox-group>
-        </b-form-group>
-        
-        <b-button type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
+      <vsd-create-br-account></vsd-create-br-account>
     </div>
 
     <div class="wizard-step" id="wizard-step-2">
-      <h3>Create Stripe Account</h3>
-      <p>This account is to manage your money and is independent of the BarberRanks app</p>
+      <vsd-connect-stripe-account></vsd-connect-stripe-account>
+    </div>
+
+    <div class="wizard-step" id="wizard-step-3">
+      <vsd-account-setup-complete></vsd-account-setup-complete>
     </div>
 
   </div>
 </template>
 
 <script>
+  import VsdCreateBrAccount from './vsd-create-br-account.vue';
+  import VsdConnectStripeAccount from './vsd-connect-stripe-account.vue';
+  import VsdAccountSetupComplete from './vsd-account-setup-complete.vue';
+
   export default {
     name: 'vsd-wizard',
-    data () {
-      return {
-        form: {
-          email: '',
-          name: '',
-          food: null,
-          checked: []
-        },
-        foods: [
-          { text: 'Select One', value: null },
-          'Carrots', 'Beans', 'Tomatoes', 'Corn'
-        ],
-        show: true
-      }
-    },
-    methods: {
-      onSubmit (evt) {
-        evt.preventDefault();
-        alert(JSON.stringify(this.form));
-      },
-      onReset (evt) {
-        evt.preventDefault();
-        /* Reset our form values */
-        this.form.email = '';
-        this.form.name = '';
-        this.form.food = null;
-        this.form.checked = [];
-        /* Trick to reset/clear native browser form validation state */
-        this.show = false;
-        this.$nextTick(() => { this.show = true });
-      }
+    components: {
+      'vsd-create-br-account': VsdCreateBrAccount,
+      'vsd-connect-stripe-account': VsdConnectStripeAccount,
+      'vsd-account-setup-complete': VsdAccountSetupComplete
     }
   }
 </script>
