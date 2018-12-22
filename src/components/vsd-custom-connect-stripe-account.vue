@@ -125,7 +125,9 @@
       onSubmit (evt){
         evt.preventDefault();
         console.log(JSON.stringify(this.form));
-        this.$store.dispatch('createCustomStripeAccount', this.form)
+        this.$store.dispatch('createCustomStripeAccount', this.form).then(() => {
+          this.$store.dispatch('setWizardStep', 3);
+        })
       }
     }
   }

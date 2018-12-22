@@ -68,7 +68,7 @@
 <script>
 export default {
   created: function(){
-  
+
     console.log("process.env");
     console.log(process.env);
   },
@@ -88,7 +88,9 @@ export default {
       console.log("Creating account:");
       console.log(JSON.stringify(this.form));
 
-      this.$store.dispatch('createBrAccount');
+      this.$store.dispatch('createBrAccount').then(() => {
+        this.$store.dispatch('setWizardStep', 2);
+      });
     },
     onReset (evt) {
       evt.preventDefault();

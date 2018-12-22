@@ -1,23 +1,25 @@
 <template>
   <div id="wizard-container">
 
-    <div class="wizard-step" id="wizard-step-1">
+    <div class="wizard-step" id="wizard-step-1" v-if="current_step == 1">
       <vsd-create-br-account></vsd-create-br-account>
     </div>
 
-    <div class="wizard-step" id="wizard-step-2-a">
-      <vsd-standard-connect-stripe-account></vsd-standard-connect-stripe-account>
+    <div class="" v-else-if="current_step == 2">
+      <div class="wizard-step" id="wizard-step-2-a" style="display: none;">
+        <vsd-standard-connect-stripe-account></vsd-standard-connect-stripe-account>
+      </div>
+
+      <div class="wizard-step" id="wizard-step-2-b" style="display: none;">
+        <vsd-express-connect-stripe-account></vsd-express-connect-stripe-account>
+      </div>
+
+      <div class="wizard-step" id="wizard-step-2-c">
+        <vsd-custom-connect-stripe-account></vsd-custom-connect-stripe-account>
+      </div>
     </div>
 
-    <div class="wizard-step" id="wizard-step-2-b">
-      <vsd-express-connect-stripe-account></vsd-express-connect-stripe-account>
-    </div>
-
-    <div class="wizard-step" id="wizard-step-2-c">
-      <vsd-custom-connect-stripe-account></vsd-custom-connect-stripe-account>
-    </div>
-
-    <div class="wizard-step" id="wizard-step-4">
+    <div class="wizard-step" id="wizard-step-3" v-else-if="current_step == 3">
       <vsd-account-setup-complete></vsd-account-setup-complete>
     </div>
 
@@ -39,6 +41,11 @@
       'vsd-express-connect-stripe-account': VsdExpressConnectStripeAccount,
       'vsd-custom-connect-stripe-account': VsdCustomConnectStripeAccount,
       'vsd-account-setup-complete': VsdAccountSetupComplete
+    },
+    computed: {
+      current_step (){
+        return this.$store.state.currentWizardStep;
+      }
     }
   }
 </script>
