@@ -5,41 +5,61 @@
 
     <b-form @submit="onSubmit" @reset="onReset">
 
+      <!-- Email -->
       <b-form-group id="email-group"
                     label="Email address:"
-                    label-for="email-input">
+                    label-for="email-input"
+                    horizontal>
         <b-form-input id="email-input"
                       type="email"
                       v-model="form.email"
                       required
-                      placeholder="Enter email">
+                      placeholder="Enter email"
+                      size="sm">
         </b-form-input>
       </b-form-group>
 
+      <!-- Full Name -->
       <b-form-group id="name-group"
                     label="Full Name:"
-                    label-for="name-input">
+                    label-for="name-input"
+                    horizontal>
         <b-form-input id="name-input"
                       type="text"
                       v-model="form.name"
                       required
-                      placeholder="Enter full name">
+                      placeholder="Enter full name"
+                      size="sm">
         </b-form-input>
       </b-form-group>
 
+      <!-- Password -->
       <b-form-group id="password-group"
                     label="Password:"
-                    label-for="password-input">
+                    label-for="password-input"
+                    horizontal>
         <b-form-input id="password-input"
                       type="password"
                       v-model="form.password"
                       required
-                      placeholder="Create password">
+                      placeholder="Create password"
+                      size="sm">
+
         </b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-row>
+        <b-col sm="2">
+          <b-button type="submit" variant="primary">Submit</b-button>
+        </b-col>
+        <b-col></b-col> <!--Spacer column-->
+        <b-col sm="2">
+          <b-button type="reset" variant="danger">Reset</b-button>
+        </b-col>
+
+      </b-row>
+
+
     </b-form>
   </div>
 
@@ -47,6 +67,11 @@
 
 <script>
 export default {
+  created: function(){
+  
+    console.log("process.env");
+    console.log(process.env);
+  },
   data () {
     return {
       form: {
@@ -59,7 +84,11 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
+
+      console.log("Creating account:");
+      console.log(JSON.stringify(this.form));
+
+      this.$store.dispatch('createBrAccount');
     },
     onReset (evt) {
       evt.preventDefault();

@@ -1,15 +1,23 @@
 <template>
   <div id="wizard-container">
-    
+
     <div class="wizard-step" id="wizard-step-1">
       <vsd-create-br-account></vsd-create-br-account>
     </div>
 
-    <div class="wizard-step" id="wizard-step-2">
-      <vsd-connect-stripe-account></vsd-connect-stripe-account>
+    <div class="wizard-step" id="wizard-step-2-a">
+      <vsd-standard-connect-stripe-account></vsd-standard-connect-stripe-account>
     </div>
 
-    <div class="wizard-step" id="wizard-step-3">
+    <div class="wizard-step" id="wizard-step-2-b">
+      <vsd-express-connect-stripe-account></vsd-express-connect-stripe-account>
+    </div>
+
+    <div class="wizard-step" id="wizard-step-2-c">
+      <vsd-custom-connect-stripe-account></vsd-custom-connect-stripe-account>
+    </div>
+
+    <div class="wizard-step" id="wizard-step-4">
       <vsd-account-setup-complete></vsd-account-setup-complete>
     </div>
 
@@ -18,14 +26,18 @@
 
 <script>
   import VsdCreateBrAccount from './vsd-create-br-account.vue';
-  import VsdConnectStripeAccount from './vsd-connect-stripe-account.vue';
+  import VsdStandardConnectStripeAccount from './vsd-standard-connect-stripe-account.vue';
+  import VsdExpressConnectStripeAccount from './vsd-express-connect-stripe-account.vue';
+  import VsdCustomConnectStripeAccount from './vsd-custom-connect-stripe-account.vue';
   import VsdAccountSetupComplete from './vsd-account-setup-complete.vue';
 
   export default {
     name: 'vsd-wizard',
     components: {
       'vsd-create-br-account': VsdCreateBrAccount,
-      'vsd-connect-stripe-account': VsdConnectStripeAccount,
+      'vsd-standard-connect-stripe-account': VsdStandardConnectStripeAccount,
+      'vsd-express-connect-stripe-account': VsdExpressConnectStripeAccount,
+      'vsd-custom-connect-stripe-account': VsdCustomConnectStripeAccount,
       'vsd-account-setup-complete': VsdAccountSetupComplete
     }
   }

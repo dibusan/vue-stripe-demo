@@ -11,6 +11,7 @@ import store from './vuex_store';
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 
+
 new Vue({
   render: h => h(App),
   store,
